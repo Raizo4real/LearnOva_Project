@@ -1,0 +1,580 @@
+/* --- إعدادات الألوان والمتغيرات --- */
+:root {
+    --primary-color: #6C63FF; /* لون بنفسجي هادئ */
+    --secondary-color: #FF6584; /* لون وردي ناعم */
+    --accent-color: #4ECDC4; /* لون تيفاني/نعناعي */
+    --bg-color: #F7F9FC; /* خلفية رمادية مزرقة فاتحة جداً */
+    --text-color: #2D3436;
+    --white: #ffffff;
+}
+
+/* --- التنسيق العام --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- شريط التنقل (Navbar) --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* تعديل اللوجو ليظهر LearnOva بشكل صحيح */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    direction: ltr; /* يجبر النص يكون من اليسار لليمين */
+    gap: 0; /* يلغي المسافة بين الكلمتين */
+}
+
+.logo span {
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-weight: 700;
+    transition: color 0.3s;
+    font-size: 1.1rem;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.btn-nav {
+    background-color: var(--primary-color);
+    color: var(--white) !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+}
+
+/* --- القسم الرئيسي (Hero Section) --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 5%;
+    min-height: 85vh;
+    position: relative;
+    background-image: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.05) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.05) 0%, transparent 20%);
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: var(--text-color);
+}
+
+.hero-text h1 span {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.hero-text h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    width: 100%;
+    height: 15px;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: #636e72;
+    max-width: 90%;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-main {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    box-shadow: 0 10px 20px rgba(255, 101, 132, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    background-color: #ff4b6e;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* --- منطقة الصورة (Hero Image) --- */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* الأنيميشن هنا عشان يحرك الصورة والخلفية سوا */
+    animation: float 6s ease-in-out infinite;
+}
+
+/* الخلفية الملونة وراء الصورة */
+.blob-bg {
+    position: absolute;
+    width: 480px; /* حجم الخلفية أكبر قليلاً من الصورة */
+    height: 480px;
+    background-color: #e0e7ff;
+    border-radius: 50%;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* تنسيق الصورة نفسها */
+.hero-image img {
+    width: 480px;          /* عرض الصورة */
+    height: 480px;         /* ارتفاع الصورة (يجب أن يكون مساوياً للعرض لتصبح دائرة) */
+    object-fit: cover;     /* ملء الدائرة دون تشويه الصورة */
+    border-radius: 50%;    /* جعل الصورة دائرية */
+object-position: right center;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+    position: relative;
+    z-index: 2;            /* جعل الصورة فوق الخلفية */
+}
+
+/* --- البطاقات السريعة (Features) --- */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 5% 5rem;
+    margin-top: -3rem;
+}
+
+.card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    border-bottom: 5px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card.c1 { border-color: var(--accent-color); }
+.card.c2 { border-color: var(--secondary-color); }
+.card.c3 { border-color: var(--primary-color); }
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+/* --- Animation Keyframes --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- التجاوب مع الجوال --- */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 2rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    
+    .blob-bg {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .hero-image img {
+        width: 280px;
+        height: 280px;
+    }
+}/* ========================================= */
+/* --- تنسيقات صفحة الوالدين (Dashboard) --- */
+/* ========================================= */
+
+.dashboard-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 5%;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.dash-header h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.date-badge {
+    background: #e0e7ff;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* --- Stats Cards --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    transition: transform 0.3s;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.i-purple { background: #e0e7ff; color: var(--primary-color); }
+.i-pink { background: #ffe0e9; color: var(--secondary-color); }
+.i-teal { background: #e0fbf9; color: var(--accent-color); }
+
+.stat-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-color);
+    margin: 0.5rem 0;
+}
+
+.stat-desc {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* --- Charts & Details Section --- */
+.details-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* الرسم البياني يأخذ مساحة أكبر */
+    gap: 1.5rem;
+}
+
+.chart-box, .activity-box {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+/* رسم بياني بسيط بالأعمدة */
+.simple-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 200px;
+    margin-top: 2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.bar {
+    width: 40px;
+    background-color: #e0e7ff;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    transition: height 1s ease;
+}
+
+.bar:hover, .bar.active {
+    background-color: var(--primary-color);
+}
+
+.bar span {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* قائمة النشاطات */
+.activity-list {
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.activity-list li {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.activity-list strong {
+    display: block;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.activity-list small {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* تجاوب للموبايل */
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    .dash-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}/* ========================================= */
+/* --- تنسيقات صفحة الدخول (Welcome Page) --- */
+/* ========================================= */
+
+.welcome-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f3f7 100%);
+    padding: 2rem;
+}
+
+.welcome-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.welcome-header p {
+    color: #888;
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+}
+
+/* الشبكة اللي شايلة الكارتين */
+.choice-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* شكل الكارت العام */
+.choice-card {
+    background: var(--white);
+    width: 280px;
+    padding: 3rem 2rem;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    border: 3px solid transparent; /* عشان الحدود لما نقف عليها */
+    cursor: pointer;
+    text-decoration: none; /* عشان ده لينك */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* تأثير عند الوقوف على الكارت */
+.choice-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s;
+}
+
+.choice-card h2 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.choice-card p {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* --- تخصيص كارت الطفل --- */
+.kid-card:hover {
+    border-color: var(--secondary-color);
+}
+.kid-card:hover .icon-circle {
+    background-color: #ffe0e9; /* خلفية وردي فاتح */
+    animation: bounce 0.5s infinite alternate;
+}
+
+/* --- تخصيص كارت الوالدين --- */
+.parent-card:hover {
+    border-color: var(--primary-color);
+}
+.parent-card:hover .icon-circle {
+    background-color: #e0e7ff; /* خلفية أزرق فاتح */
+}
+
+/* حركة بسيطة للأيقونة */
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+/* الفوتر البسيط تحت */
+.welcome-footer {
+    margin-top: 4rem;
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+/* للتجاوب مع الموبايل */
+@media (max-width: 600px) {
+    .choice-grid {
+        flex-direction: column;
+    }
+    .welcome-header h1 {
+        font-size: 2rem;
+    }
+}

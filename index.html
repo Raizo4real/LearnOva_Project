@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnova - تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+
+    <div class="top-logo">Learn<span>Ova</span></div>
+
+    <div class="container ltr-layout" id="container">
+
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>إنشاء حساب</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <span>أو استخدم بريدك الإلكتروني</span>
+                <input type="text" placeholder="الاسم" />
+                <input type="email" placeholder="البريد الإلكتروني" />
+                <input type="password" placeholder="كلمة المرور" />
+                <button>تسجيل</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form action="Welcome.html">
+                <h1>تسجيل الدخول</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <span>تسجيل الدخول</span>
+                <input type="email" placeholder="البريد الإلكتروني" />
+                <input type="password" placeholder="كلمة المرور" />
+                <a href="#">نسيت كلمة المرور؟</a>
+                <button>دخول</button>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>مرحباً بك في ليرنوڤا</h1>
+                    <p>للإطلاع علي المستوي يرجي تسجيل الدخول</p>
+                    <button class="ghost" id="signIn">تسجيل الدخول</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>مرحباً بك في ليرنوڤا</h1>
+                    <p>ابدأ رحلتك  معنا وأنشئ حسابك الآن</p>
+                    <button class="ghost" id="signUp">إنشاء حساب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
+    </script>
+</body>
+</html>

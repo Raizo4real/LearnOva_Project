@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnova - بوابة الوالدين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="welcome.html" class="logo">Learn<span>Ova</span></a>
+        <ul class="nav-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">الإعدادات</a></li>
+            <li><a href="Kids.html" class="btn-nav" style="background-color: var(--secondary-color);">خروج</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <header class="dash-header">
+            <div>
+                <h2>مرحباً، والد أحمد 👋</h2>
+                <p>إليك ملخص نشاط طفلك وتطوره هذا الأسبوع.</p>
+            </div>
+            <div class="date-badge">📅 ديسمبر 2025</div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="icon-box i-purple">😊</div>
+                <h3>الحالة المزاجية</h3>
+                <p class="stat-num">سعيد جداً</p>
+                <span class="stat-desc">بناءً على تفاعله اليوم</span>
+            </div>
+            <div class="stat-card">
+                <div class="icon-box i-pink">⚡</div>
+                <h3>سرعة الاستجابة</h3>
+                <p class="stat-num">85%</p>
+                <span class="stat-desc">تحسن بنسبة 10% عن أمس</span>
+            </div>
+            <div class="stat-card">
+                <div class="icon-box i-teal">🎮</div>
+                <h3>الاختبارات المنجزة</h3>
+                <p class="stat-num">12</p>
+                <span class="stat-desc">اختبار ذكاء ومشاعر</span>
+            </div>
+        </section>
+
+        <section class="details-grid">
+            
+            <div class="chart-box">
+                <h3>📊 معدل التركيز خلال الأسبوع</h3>
+                <div class="simple-chart">
+                    <div class="bar" style="height: 60%;" title="السبت"><span>السبت</span></div>
+                    <div class="bar" style="height: 80%;" title="الأحد"><span>الأحد</span></div>
+                    <div class="bar" style="height: 40%;" title="الاثنين"><span>الاثنين</span></div>
+                    <div class="bar active" style="height: 90%;" title="الثلاثاء"><span>الثلاثاء</span></div>
+                    <div class="bar" style="height: 70%;" title="الأربعاء"><span>الأربعاء</span></div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>📌 آخر النشاطات</h3>
+                <ul class="activity-list">
+                    <li>
+                        <span class="dot"></span>
+                        <div>
+                            <strong>لعبة تمييز الألوان</strong>
+                            <small>منذ 2 ساعة • نتيجة ممتازة</small>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dot" style="background: var(--secondary-color);"></span>
+                        <div>
+                            <strong>اختبار تعبيرات الوجه</strong>
+                            <small>منذ 5 ساعات • يحتاج تدريب</small>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dot" style="background: var(--accent-color);"></span>
+                        <div>
+                            <strong>لعبة تركيب الأشكال</strong>
+                            <small>أمس • نتيجة جيدة</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+    </div>
+<script>
+
+    const data = {
+        "السبت": { mood: "سعيد جداً", icon: "😊", speed: "90%", tests: "15", colorClass: "i-purple" },
+        "الأحد": { mood: "قلق قليلاً", icon: "😟", speed: "65%", tests: "8", colorClass: "i-pink" },
+        "الاثنين": { mood: "هادئ", icon: "😐", speed: "70%", tests: "10", colorClass: "i-teal" },
+        "الثلاثاء": { mood: "نشيط", icon: "⚡", speed: "85%", tests: "12", colorClass: "i-purple" },
+        "الأربعاء": { mood: "سعيد", icon: "😄", speed: "88%", tests: "14", colorClass: "i-teal" },
+    };
+
+  
+    const bars = document.querySelectorAll('.bar'); 
+    const moodText = document.querySelector('.stat-card:nth-child(1) .stat-num'); 
+    const moodIcon = document.querySelector('.stat-card:nth-child(1) .icon-box'); 
+    const speedText = document.querySelector('.stat-card:nth-child(2) .stat-num'); 
+    const testsText = document.querySelector('.stat-card:nth-child(3) .stat-num'); 
+
+   
+    bars.forEach(bar => {
+        bar.addEventListener('click', function() {
+      
+            bars.forEach(b => b.classList.remove('active'));
+            
+  
+            this.classList.add('active');
+
+     
+            const dayName = this.getAttribute('title');
+
+      
+            if (data[dayName]) {
+                
+                moodText.innerText = data[dayName].mood;
+                moodIcon.innerText = data[dayName].icon;
+                speedText.innerText = data[dayName].speed;
+                testsText.innerText = data[dayName].tests;
+
+               
+                moodIcon.className = 'icon-box ' + data[dayName].colorClass;
+              
+                animateValue(speedText);
+                animateValue(testsText);
+            }
+        });
+    });
+
+   
+    function animateValue(element) {
+        element.style.opacity = 0;
+        setTimeout(() => {
+            element.style.opacity = 1;
+        }, 200);
+    }
+</script>
+
+<style>
+   
+    .stat-num { transition: opacity 0.2s; }
+    .bar { cursor: pointer; }
+</style>
+</body>
+</html>

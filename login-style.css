@@ -1,0 +1,177 @@
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #FF6584;
+    --bg-color: #F7F9FC;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg-color);
+    background-image: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.05) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.05) 0%, transparent 20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- إصلاح اللوجو (LearnOva) --- */
+/* --- الحل الجذري: توحيد الحجم والسمك --- */
+/* --- إصلاح اللوجو النهائي (سطر واحد + نفس الحجم) --- */
+/* --- الحل النهائي للوجو --- */
+.top-logo {
+    /* 1. نخليه ياخد عرض الشاشة بالكامل عشان ميتفعصش */
+    width: 100%;
+    
+    /* 2. نوسطن الكلام جواه */
+    text-align: center;
+    
+    /* 3. الإعدادات الأساسية للخط */
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    
+    /* 4. السحر: نتعامل معاه كنص إنجليزي عادي (قطعة واحدة) */
+    direction: ltr !important; 
+    display: block; /* بلوك عادي مش فليكس */
+    white-space: nowrap; /* ممنوع كسر السطر نهائياً */
+}
+
+.top-logo span { 
+    color: var(--secondary-color);
+    display: inline; /* جزء من النص، مش عنصر منفصل */
+font-size: 50px
+}/* --- الحاوية الرئيسية --- */
+.container {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    width: 850px;
+    max-width: 100%;
+    min-height: 550px;
+    
+    /* الحل السحري للستارة: نخلي الحاوية من جواها تترتب LTR */
+    /* ده بيضمن إن الستارة تيجي يمين والفورم شمال زي التصميم الأصلي */
+    direction: ltr; 
+}
+
+/* نعيد ضبط النصوص داخل الفورم لتكون عربي */
+.form-container form {
+    direction: rtl; 
+}
+
+/* ونعيد ضبط نصوص الستارة لتكون عربي */
+.overlay-panel {
+    direction: rtl;
+}
+
+
+/* باقي الكود الأساسي للحركة والستارة */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container { left: 0; width: 50%; z-index: 2; }
+.sign-up-container { left: 0; width: 50%; opacity: 0; z-index: 1; }
+
+.container.right-panel-active .sign-in-container { transform: translateX(100%); }
+.container.right-panel-active .sign-up-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; }
+
+@keyframes show { 0%, 49.99% { opacity: 0; z-index: 1; } 50%, 100% { opacity: 1; z-index: 5; } }
+
+form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+h1 { font-weight: bold; margin: 0; margin-bottom: 10px; }
+.social-container { margin: 15px 0; }
+.social-container a {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px; width: 40px;
+    color: #333;
+}
+
+span { font-size: 12px; margin-bottom: 15px; display: block; }
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-family: 'Tajawal', sans-serif;
+    outline: none;
+    text-align: right; /* عشان الكتابة تيجي يمين */
+}
+
+button {
+    border-radius: 50px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 12px; font-weight: bold;
+    padding: 12px 45px; margin-top: 15px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    transition: 0.3s;
+}
+button:hover { background-color: #5a52d5; }
+button.ghost { background-color: transparent; border-color: #ffffff; }
+
+/* --- الستارة (Overlay) --- */
+.overlay-container {
+    position: absolute; top: 0; left: 50%; width: 50%; height: 100%;
+    overflow: hidden; transition: transform 0.6s ease-in-out; z-index: 100;
+}
+.container.right-panel-active .overlay-container { transform: translateX(-100%); }
+
+.overlay {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    background-repeat: no-repeat; background-size: cover; background-position: 0 0;
+    color: #ffffff; position: relative; left: -100%; height: 100%; width: 200%;
+    transform: translateX(0); transition: transform 0.6s ease-in-out;
+}
+.container.right-panel-active .overlay { transform: translateX(50%); }
+
+.overlay-panel {
+    position: absolute; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; padding: 0 40px; text-align: center;
+    top: 0; height: 100%; width: 50%; transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-right { right: 0; transform: translateX(0); }
+.overlay-left { transform: translateX(-20%); }
+.container.right-panel-active .overlay-left { transform: translateX(0); }
+.container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+/* --- موبايل --- */
+@media (max-width: 768px) {
+    .container { width: 100%; min-height: 800px; }
+    .overlay-container { display: none; }
+    .sign-in-container, .sign-up-container { width: 100%; position: static; height: auto; padding: 30px; }
+    .sign-up-container { display: none; }
+}
